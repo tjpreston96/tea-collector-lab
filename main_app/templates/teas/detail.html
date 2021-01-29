@@ -1,0 +1,19 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+<h1>Tea Details</h1>
+
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">{{ tea.name }}</span>
+    <p>Kind: {{ tea.kind }}</p>
+    <p>Description: {{ tea.description }}</p>
+    {% if tea.age > 0 %}
+    <p>Age: {{ tea.age }} months old</p>
+    {% else %}
+    <p>Age: Unopened</p>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

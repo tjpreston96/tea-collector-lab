@@ -1,3 +1,4 @@
+from .models import Tea
 from django.shortcuts import render
 
 
@@ -5,8 +6,18 @@ from django.shortcuts import render
 
 # define the home view
 def home(request):
-    return HttpResponse("<h1>hello</h1>")
+    return render(request, "home.html")
 
 
 def about(request):
     return render(request, "about.html")
+
+
+def teas_index(request):
+    teas = Tea.objects.all()
+    return render(request, "teas/index.html", {"teas": teas})
+
+
+def teas_detail(request, tea_id):
+    tea = Tea.objects.get(id=tea_id)
+    return render(request, "teas/detail.html", {"tea": tea})
