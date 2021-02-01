@@ -1,5 +1,4 @@
-{% extends 'base.html' %} 
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <h1>Tea Details</h1>
 
@@ -13,6 +12,10 @@
     {% else %}
     <p>Age: Unopened</p>
     {% endif %}
+  </div>
+  <div class="card-action">
+    <a href="{% url 'teas_update' tea.id %}">Edit</a>
+    <a href="{% url 'teas_delete' tea.id %}">Delete</a>
   </div>
 </div>
 

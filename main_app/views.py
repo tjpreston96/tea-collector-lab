@@ -1,5 +1,6 @@
 from .models import Tea
 from django.shortcuts import render
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
 # Create your views here.
@@ -21,3 +22,19 @@ def teas_index(request):
 def teas_detail(request, tea_id):
     tea = Tea.objects.get(id=tea_id)
     return render(request, "teas/detail.html", {"tea": tea})
+
+
+class TeaCreate(CreateView):
+    model = Tea
+    fields = "__all__"
+    success_url = "/teas/"
+
+
+class TeaUpdate(UpdateView):
+    model = Tea
+    fields = "__all__"
+
+class TeaDelete(DeleteView):
+    model = Tea
+    success_url = '/teas/'
+
