@@ -1,6 +1,7 @@
 from .models import Tea
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from .forms import SweeteningForm
 
 
 # Create your views here.
@@ -21,7 +22,11 @@ def teas_index(request):
 
 def teas_detail(request, tea_id):
     tea = Tea.objects.get(id=tea_id)
-    return render(request, "teas/detail.html", {"tea": tea})
+    # render to template
+    sweetening_form = SweeteningForm()
+    return render(
+        request, "teas/detail.html", {"tea": tea, "sweetening_form": sweetening_form}
+    )
 
 
 class TeaCreate(CreateView):
@@ -34,7 +39,7 @@ class TeaUpdate(UpdateView):
     model = Tea
     fields = "__all__"
 
+
 class TeaDelete(DeleteView):
     model = Tea
-    success_url = '/teas/'
-
+    success_url = "/teas/"

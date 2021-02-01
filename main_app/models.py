@@ -23,7 +23,7 @@ class Tea(models.Model):
 
 
 class Sweetening(models.Model):
-    date = models.DateField()
+    date = models.DateField('Tea time')
     style = models.CharField(
         max_length=1,
         # add the 'choices' field option
