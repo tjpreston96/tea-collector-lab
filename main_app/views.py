@@ -1,5 +1,5 @@
 from .models import Tea
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import SweeteningForm
 
@@ -27,6 +27,19 @@ def teas_detail(request, tea_id):
     return render(
         request, "teas/detail.html", {"tea": tea, "sweetening_form": sweetening_form}
     )
+
+
+def add_sweetening(request, tea_id):
+    # create a ModelForm instance using the data in request.POST
+    form = SweeteningForm(request.POST)
+    # validate the form
+    if form.is_valid():
+        #  don't save the form to the db until it
+        # has the tea_id assigned
+        new_sweetening = form.save(commit=False)
+        new_sweetening.tea_id = tea_id
+        new_sweetening.save()
+    return redirect("detail", tea_id=tea_id)
 
 
 class TeaCreate(CreateView):

@@ -21,9 +21,12 @@ class Tea(models.Model):
     def get_absolute_url(self):
         return reverse("detail", kwargs={"tea_id": self.id})
 
+    class Meta:
+        ordering = ["id"]
+
 
 class Sweetening(models.Model):
-    date = models.DateField('Tea time')
+    date = models.DateField("Tea time")
     style = models.CharField(
         max_length=1,
         # add the 'choices' field option
@@ -38,3 +41,6 @@ class Sweetening(models.Model):
     def __str__(self):
         # friendly value of Field.choice
         return f"{self.get_style_display()} on {self.date}"
+
+    class Meta:
+        ordering = ["-date"]
