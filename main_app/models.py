@@ -1,6 +1,13 @@
 from django.db import models
 from django.urls import reverse
 
+STYLES = (
+    ("P", "Plain"),
+    ("S", "Sugar"),
+    ("A", "Almond Milk & Sugar"),
+    ("M", "Soy Milk & Sugar"),
+)
+
 # Create your models here.
 class Tea(models.Model):
     name = models.CharField(max_length=100)
@@ -15,3 +22,19 @@ class Tea(models.Model):
         return reverse("detail", kwargs={"tea_id": self.id})
 
 
+class Sweetening(models.Model):
+    date = models.DateField()
+    style = models.CharField(
+        max_length=1,
+        # add the 'choices' field option
+        choices=STYLES,
+        # set the default value for style to 'P'
+        default=STYLES[0][0],
+    )
+
+    # FOREIGN KEY
+    tea = models.ForeignKey(Tea, on_delete=models.CASCADE)
+
+    def __str__(self):
+        # friendly value of Field.choice
+        return f"{self.get_style_display()} on {self.date}"
