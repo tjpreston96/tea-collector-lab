@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Cup Details</h1>
+
+<div class="row">
+  <div class="col s6 col-offset-3">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">{{ cup.name }}</span>
+        <p>Color: {{ cup.color }}</p>
+      </div>
+      <div class="card-action">
+        <a href="{% url 'cups_update' cup.id %}">Edit</a>
+        <a href="{% url 'cups_delete' cup.id %}">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

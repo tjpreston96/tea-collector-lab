@@ -1,5 +1,6 @@
-from .models import Tea
+from .models import Tea, Cup
 from django.shortcuts import render, redirect
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import SweeteningForm
 
@@ -56,3 +57,21 @@ class TeaUpdate(UpdateView):
 class TeaDelete(DeleteView):
     model = Tea
     success_url = "/teas/"
+
+class CupList(ListView):
+  model = Cup
+
+class CupDetail(DetailView):
+  model = Cup
+
+class CupCreate(CreateView):
+  model = Cup
+  fields = '__all__'
+
+class CupUpdate(UpdateView):
+  model = Cup
+  fields = ['name', 'color']
+
+class CupDelete(DeleteView):
+  model = Cup
+  success_url = '/cups/'
