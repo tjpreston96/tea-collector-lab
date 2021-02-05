@@ -2,7 +2,6 @@
 
 <h1>Tea Details</h1>
 
-<
 <div class="row">
   <div class="col s6">
     <div class="card">
@@ -24,8 +23,7 @@
   </div>
   <div class="col s6">
     <form action="{% url 'add_sweetening' tea.id %}" method="post">
-      {% csrf_token %} 
-      {{ sweetening_form.as_p }}
+      {% csrf_token %} {{ sweetening_form.as_p }}
       <input type="submit" class="btn" value="Add Sweetening" />
     </form>
     <table class="striped">
@@ -46,6 +44,27 @@
     </table>
   </div>
 </div>
+<hr>
+<div class="row">
+  <div class="col s6">
+    <h3>{{ tea.name }}'s cups</h3>
+    {% if tea.cups.count %}
+      {% for cup in tea.cups.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              A <span style="color: {{ cup.color }}">{{ cup.color }}</span> {{ cup.name }}
+            </span>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>No cups :(</h5>
+    {% endif %}
+  </div>
+  <!-- Available cups will come after this line -->
+</div>
+
 <script>
   // date picker
   var dateEl = document.getElementById("id_date");

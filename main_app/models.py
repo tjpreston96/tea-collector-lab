@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from datetime import date
 
 STYLES = (
     ("P", "Plain"),
@@ -27,6 +28,7 @@ class Tea(models.Model):
     kind = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
     age = models.IntegerField()
+    cups = models.ManyToManyField(Cup)
 
     def __str__(self):
         return self.name
