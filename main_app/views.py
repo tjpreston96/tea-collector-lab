@@ -32,6 +32,9 @@ def teas_detail(request, tea_id):
         {"tea": tea, "sweetening_form": sweetening_form, "cups": cups_tea_doesnt_have},
     )
 
+def assoc_cup(request, tea_id, cup_id):
+  Tea.objects.get(id=tea_id).cups.add(cup_id)
+  return redirect('detail', tea_id=tea_id)
 
 def add_sweetening(request, tea_id):
     # create a ModelForm instance using the data in request.POST

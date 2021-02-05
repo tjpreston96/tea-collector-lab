@@ -12,9 +12,12 @@ urlpatterns = [
     path(
         "teas/<int:tea_id>/add_sweetening/", views.add_sweetening, name="add_sweetening"
     ),
-    path('cups/', views.CupList.as_view(), name='cups_index'),
-    path('cups/<int:pk>/', views.CupDetail.as_view(), name='cups_detail'),
-    path('cups/create/', views.CupCreate.as_view(), name='cups_create'),
-    path('cups/<int:pk>/update/', views.CupUpdate.as_view(), name='cups_update'),
-    path('cups/<int:pk>/delete/', views.CupDelete.as_view(), name='cups_delete'),
+    path(
+        "teas/<int:tea_id>/assoc_cup/<int:cup_id>/", views.assoc_cup, name="assoc_cup"
+    ),
+    path("cups/", views.CupList.as_view(), name="cups_index"),
+    path("cups/<int:pk>/", views.CupDetail.as_view(), name="cups_detail"),
+    path("cups/create/", views.CupCreate.as_view(), name="cups_create"),
+    path("cups/<int:pk>/update/", views.CupUpdate.as_view(), name="cups_update"),
+    path("cups/<int:pk>/delete/", views.CupDelete.as_view(), name="cups_delete"),
 ]
