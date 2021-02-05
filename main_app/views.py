@@ -25,8 +25,11 @@ def teas_detail(request, tea_id):
     tea = Tea.objects.get(id=tea_id)
     # render to template
     sweetening_form = SweeteningForm()
+    cups_tea_doesnt_have = Cup.objects.exclude(id__in=tea.cups.all().values_list("id"))
     return render(
-        request, "teas/detail.html", {"tea": tea, "sweetening_form": sweetening_form}
+        request,
+        "teas/detail.html",
+        {"tea": tea, "sweetening_form": sweetening_form, "cups": cups_tea_doesnt_have},
     )
 
 
@@ -58,20 +61,25 @@ class TeaDelete(DeleteView):
     model = Tea
     success_url = "/teas/"
 
+
 class CupList(ListView):
-  model = Cup
+    model = Cup
+
 
 class CupDetail(DetailView):
-  model = Cup
+    model = Cup
+
 
 class CupCreate(CreateView):
-  model = Cup
-  fields = '__all__'
+    model = Cup
+    fields = "__all__"
+
 
 class CupUpdate(UpdateView):
-  model = Cup
-  fields = ['name', 'color']
+    model = Cup
+    fields = ["name", "color"]
+
 
 class CupDelete(DeleteView):
-  model = Cup
-  success_url = '/cups/'
+    model = Cup
+    success_url = "/cups/"
